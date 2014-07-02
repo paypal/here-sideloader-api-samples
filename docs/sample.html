@@ -1,0 +1,81 @@
+<html>
+<head>
+<title>Invoicing API example</title>
+<script type="text/javascript"
+src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.2/jquery.min.js"></script>
+<script type="text/javascript" src="jquery.json-2.3.min.js"></script>
+<script type="text/javascript" src="base64.js"></script>
+<script type="text/javascript">
+function doInvoice(){
+
+    //assign some variables
+    var shirtQty = $('input:text[id=shirt]').val();
+    var mugQty = $('input:text[id=mug]').val();
+    var payer = encodeURIComponent($('input:text[id=buyer_email]').val());
+    var invoice = encodeURIComponent($('input:text[id=invoice]').val());
+    var number = encodeURIComponent($('input:text[id=number]').val());
+
+    //creating vars to be used in API call
+    var retUrl = encodeURIComponent("http://www.myurl.com/return.php?{result}?Type={Type}&InvoiceId={InvoiceId}&Tip={Tip}&Email={Email}&TxId={TxId}");
+    var pphereUrl = "paypalhere://takePayment?accepted=" + encodeURIComponent("cash,card,paypal") + "&returnUrl=" + retUrl;
+    pphereUrl += "&InvoiceId=" + invoice + "&as=b64&payerPhone=5551234567&step=choosePayment";
+
+    var myItemList = new Array();
+    var mugItem = {};
+    var shirtItem = {};
+
+    //create item objects
+    if (mugQty > 0 ){
+        mugItem.taxRate = "8.00";
+        mugItem.name = "2012 Special Mug";
+        mugItem.description = "Coffee Mug";
+        mugItem.unitPrice = "0.75";
+        mugItem.taxName = "Tax";
+        mugItem.quantity = mugQty;
+        myItemList.push(mugItem);
+    }
+
+    if (shirtQty > 0){
+        var shirtItem = {}
+        shirtItem.taxRate = "8.00";
+        shirtItem.name = "2012 T-shirt";
+        shirtItem.description = "T-shirt";
+        shirtItem.unitPrice = "0.50";
+        shirtItem.taxName = "Tax";
+        shirtItem.quantity = shirtQty;
+        myItemList.push(shirtItem);
+    }
+
+    //create main invoice object
+    invoice=new Object();
+    invoice.paymentTerms = "DueOnReceipt";
+    invoice.currencyCode = "USD";
+    invoice.number = number;
+    invoice.merchantEmail = "merchant@email.com";
+    invoice.payerEmail = payer;
+    invoice.itemList = new Object();
+    invoice.itemList.item = myItemList;
+    pphereUrl = pphereUrl + "&invoice=" + $.base64.encode($.toJSON(invoice));
+    window.location.href=pphereUrl;
+}
+</script>
+</head>
+<body>
+<form id="entryForm" action="">
+<table>
+ <tr><td>Order Entry Mock Up</td></tr>
+ <tr><td>Order Invoice Id</td><td><input type="text" id="invoice" value="Order-1341582881" /></td></tr>
+ <tr><td>Number</td><td><input type="text" id="number" value="1341582881" /></td></tr>
+ <tr><td>Items</td><td>
+   <table id="items">
+    <tr><td><input type="text" id="shirt" value="1" size="2"/></td><td>Event T-Shirt ($0.50)</td></tr>
+    <tr><td><input type="text" id="mug" value="1" size="2" /></td><td>Event Mug ($0.75)</td></tr>
+   </table>
+  </td>
+  </tr>
+ <tr><td>Customer Email</td><td><input type="text" id="buyer_email" value="buyer@email.com" /></td></tr>
+ <tr><td colspan="2"><input type="button" id="button" value="Place Order" onclick="doInvoice();"/></td></tr>
+</table>
+</form>
+</body>
+</html>
