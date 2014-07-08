@@ -10,11 +10,17 @@ Basically you need either a phone with Android or iOS with our PayPal Here&trade
 The Sideloader API uses an url scheme to communicate with PayPal's app and retrieve the payment's result via a callback mechanism.
 
 Using this allows you to accept payments via:
+
 * Credit card
 * PayPal
 * Checkin
 * Invoice
 * Cash
+ 
+Getting Started
+---------------
+
+[Find the documentation here](docs/README.md)
 
 Author
 ----
