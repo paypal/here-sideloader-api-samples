@@ -1,6 +1,6 @@
 # PayPal Here™ Mobile Apps API
 
-## Getting Started Guide, version 1.2
+## Getting Started Guide, version 1.3
 
 The functionality described in this document is subject to change.
 
@@ -41,6 +41,12 @@ To send an invoice to the PayPal Here app, specify a URL.
 The URL root is the following:
 
     paypalhere://takePayment?
+
+For new Android integrations use:
+
+    paypalhere://takePayment/v2?
+
+Android apps using `takePayment` will continue working as is, but `takePayment/v2` behavior is in sync with the API described in this document.
 
 When the URL root is used with the input fields discussed in this document, the PayPal Here mobile app
 is launched. **Most of the input values must be URL-encoded**, but the invoice data **can be** Base64-
@@ -344,7 +350,7 @@ The data for the `returnUrl` input field is a URL that can include placeholders 
 | `InvoiceId` | The invoice ID. Specify `InvoiceId={InvoiceId}` |
 | `Tip` | The tip, if applicable. `Specify Tip={Tip}` |
 | `TxId` | The tax ID of the merchant. Specify `TxId={TxId}` |
-
+| `Email` | Email of buyer, if available. Specifiy `Email={Email}` |
 
 
 ### Output Fields
@@ -354,6 +360,7 @@ The data for the `returnUrl` input field is a URL that can include placeholders 
 | `Type` | The payment method, for example `SWIPE`. Returned values are listed below, but your code should be able to handle new values as they get introduced. <br /><br /> If the transaction was interrupted, for example if a credit card was declined, the value is `UNKNOWN`. Note: If a credit card is declined, the merchant can enter an alternative payment method. <br /><br /> If the merchant cancels, the order-entry’s return URL is called, appended with `Type=Unknown`. <br /><br />Due to legacy issues, the values for "Type" currently differ based on the version being used.<br />On PayPal Here versions 2.x, these values can be: `UNKNOWN`, `KEY`, `SCAN`, `SWIPE`, `PAYPAL`, `CHECK`, `CASH`, `CHIP`, `EMV_SWIPE`.<br />On iPad 1.x, these values can be: `Unknown`, `CreditCard`, `Check`, `Cash`, `PayPal`, `DebitCard`, `Other`, `ChipCard`.<br /><br />For iPad versions 2.3 and later, the values are consistent with iPhone.<br /><br />You should code your integrations to handle new values being returned in this field.|
 | `InvoiceId` | The ID of the new invoice for which payment was accepted. For information about the input value that corresponds to this ID, see __Invoice as a JSON object.  |
 | `Tip` | The monetary value tip, if applicable. |
+| `Email` | Buyer email, if available. |
 
 
 ## Appendix A: Sample HTML and Javascript Code
