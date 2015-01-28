@@ -1,0 +1,152 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    tools:context=".PayPalHereLauncher">
+
+    <LinearLayout
+        android:id="@+id/invoice_info_container"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:paddingRight="2dip"
+        android:orientation="vertical"
+        android:padding="13dip">
+
+        <TextView
+            android:text="PayPal Here Launcher"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Invoice Number"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/invoice_number"
+                style="@style/item"
+                android:text=""/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Payment Terms"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/payment_terms"
+                style="@style/item"
+                android:text="DueOnReceipt"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Discount %"
+                style="@style/item" />
+
+            <EditText
+                android:id="@+id/discount"
+                style="@style/item"
+                android:text="0"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Currency Code"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/currency_code"
+                style="@style/item"
+                android:text="USD"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Merchant Email"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/merchant_email"
+                style="@style/item"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Payer Email"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/payer_email"
+                style="@style/item"/>
+        </LinearLayout>
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Payer Phone"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/payer_phone"
+                style="@style/item"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@id/currency_code">
+
+            <TextView
+                android:text="Items Added"
+                style="@style/item"/>
+
+            <TextView
+                android:text="0"
+                style="@style/item"
+                android:id="@+id/item_count"/>
+
+            <Button
+                android:id="@+id/currency_code"
+                android:text="Add"
+                style="@style/item"
+                android:onClick="addItem"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_marginTop="6dip"
+                android:onClick="launchPayPalHere"
+                android:text="Collect Payment with PayPal Here"
+                android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>

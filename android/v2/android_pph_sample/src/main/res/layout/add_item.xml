@@ -1,0 +1,118 @@
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_height="fill_parent"
+    android:layout_width="fill_parent"
+    tools:context=".PayPalHereLauncher">
+
+    <LinearLayout
+        android:id="@+id/invoice_info_container"
+        android:layout_height="wrap_content"
+        android:layout_width="fill_parent"
+        android:paddingRight="2dip"
+        android:orientation="vertical"
+        android:padding="13dip">
+
+        <TextView
+            android:text="PayPal Here Launcher"
+            style="@android:style/TextAppearance.Medium"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center_horizontal"/>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Name"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/name"
+                style="@style/item" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Description"
+                style="@style/item" />
+
+            <EditText
+                android:id="@+id/description"
+                style="@style/item" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Unit Price"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/price"
+                style="@style/item"
+                android:inputType="numberDecimal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Tax Name"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/tax_name"
+                style="@style/item"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Tax Rate"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/tax_rate"
+                style="@style/item"
+                android:inputType="numberDecimal"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:text="Quantity"
+                style="@style/item"/>
+
+            <EditText
+                android:id="@+id/quantity"
+                style="@style/item"
+                android:inputType="number"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content">
+
+            <Button
+                android:layout_marginTop="6dip"
+                android:onClick="addItem"
+                android:text="Add"
+                android:layout_gravity="center"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </LinearLayout>
+</ScrollView>
