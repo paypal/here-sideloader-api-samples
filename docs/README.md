@@ -153,9 +153,6 @@ For related information about the invoice format, in a **different context**, se
 
 Note: In the JSON input object (containing the invoice data), you should provide a unique invoice ID (in the `number` field). It must be unique within the merchant’s scope. Do not send a hardcoded value such as "`12345678`", as that will result in errors. If you leave out the number field, an invoice ID will be assigned, but if you provide the number field with no value (for example, if you send `“number”: “”`), unexpected behavior will result.
 
-If you provide an invoice number for a **paid, existing** invoice, the PayPal Here app re-launches your app without completing payment, using the return URL specified in the original request, along with available data for the transaction.
-
-
 ### URL-Encoded Input Data
 Append (to the URL root) your input fields and their URL-encoded data. These input fields include the
 as input field, described above. For information in this document about the fields, see Call Reference.
