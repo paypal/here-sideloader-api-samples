@@ -196,10 +196,10 @@ Your order-entry app can send an invoice to the PayPal Here app. For a descripti
 The data for the `returnUrl` input field is a URL that can include placeholders for the desired transaction information. That is, you can use curly braces in the URL for the PayPal Here app to return specific data about the transaction. The following table provides information about the keys you can use and the data they will get replaced with. For an example, see _URL-Encoded Input Fields_.
 
 As an example, if your return URL is:
-```myAppURLScheme://returnFromPPH?type={Type}&pph_inv_id={InvoiceId}```
+`myAppURLScheme://returnFromPPH?type={Type}&pph_inv_id={InvoiceId}`
 
 Then it will get changed into something like:
-```myAppURLScheme://returnFromPPH?type=CreditCard&pph_inv_id=12345```
+`myAppURLScheme://returnFromPPH?type=CreditCard&pph_inv_id=12345`
 
 | Field of the `returnUrl` input field  | Description |
 | -------------     | ----------- |
