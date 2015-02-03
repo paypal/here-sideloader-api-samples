@@ -193,12 +193,17 @@ Your order-entry app can send an invoice to the PayPal Here app. For a descripti
 
 ### Structuring the `returnUrl` Input Field
 
-The data for the `returnUrl` input field is a URL that can include placeholders for the desired transaction information. That is, you can use curly braces in the URL for the PayPal Here app to return specific data about the transaction. The following table provides information about this data. For an example, see _URL-Encoded Input Fields_.
+The data for the `returnUrl` input field is a URL that can include placeholders for the desired transaction information. That is, you can use curly braces in the URL for the PayPal Here app to return specific data about the transaction. The following table provides information about the keys you can use and the data they will get replaced with. For an example, see _URL-Encoded Input Fields_.
+
+As an example, if your return URL is:
+```myAppURLScheme://returnFromPPH?type={Type}&pph_inv_id={InvoiceId}```
+
+Then it will get changed into something like:
+```myAppURLScheme://returnFromPPH?type=CreditCard&pph_inv_id=12345```
 
 | Field of the `returnUrl` input field  | Description |
 | -------------     | ----------- |
 | Root URL of your app, including the call that was invoked by your app. Example: `my_registered_location://takePayment` | The PayPal Here app uses this value to return the merchant to your app, after payment |
-| `{result}?` | The fields whose values you want returned by the PayPal Here app |
 | `Type` | The type of payment made, e.g. `SWIPE`. Specify `Type={Type}` See _Output Fields_ below for a comprehensive listing |
 | `InvoiceId` | The invoice ID. Specify `InvoiceId={InvoiceId}` |
 | `Tip` | The tip, if applicable. `Specify Tip={Tip}` |
