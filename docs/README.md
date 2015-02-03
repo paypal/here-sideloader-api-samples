@@ -56,7 +56,6 @@ The invoice data is sent in a JSON object. Before encoding, the full URL, with t
         "discountPercent": "0",
         "currencyCode": "USD",
         "number": "1457",
-        "merchantEmail": "merchant@ebay.com",
         "payerEmail": "foo@bar.com",
         "itemList": {
             "item": [
@@ -86,8 +85,6 @@ Put the invoice data (one or more items and amounts) into a JSON object.
 
 The JSON object’s format is largely the same as the invoice format in the PayPal Invoicing Service. For information about the available fields, see the descriptions in [CreateInvoice (a call in the Invoicing Service)](https://developer.paypal.com/webapps/developer/docs/classic/api/invoicing/CreateInvoice_API_Operation/). However, only certain fields are used; see the section "Call Reference" below for more details.
 
-The `merchantEmail` value must be a valid PayPal account and must match the account with which the merchant (or developer) will sign into the PayPal Here app (to process a payment).
-
 Note that duplicate items are ignored in the `itemList`; instead, you should increment the quantity.
 
 **Note:** Sending an invoice field with no value (for example, sending `“payerEmail”: “”`) will cause unexpected behavior, so remove any fields that lack a value.
@@ -101,7 +98,6 @@ For example, before encoding the values of each input field, the JSON object cou
         "discountPercent": "0",
         "currencyCode": "USD",
         "number": "1457",
-        "merchantEmail": "merchant@ebay.com",
         "payerEmail": "foo@bar.com",
         "itemList": {
             "item": [
@@ -308,7 +304,6 @@ This sample code uses the JSONKit parser, but your app may use a different JSON 
     [invoiceObj setObject:@"0" forKey:@"discountPercent"];
     [invoiceObj setObject:@"USD" forKey:@"currencyCode"];
     [invoiceObj setObject:@"9876" forKey:@"number"];
-    [invoiceObj setObject:@"merchant@ebay.com" forKey:@"merchantEmail"];
     [invoiceObj setObject:@"foo@bar.com" forKey:@"payerEmail"];
     [invoiceObj setObject:itemListDictionary forKey:@"itemList"];
 
