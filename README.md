@@ -22,12 +22,6 @@ Getting Started
 
 [Find the documentation here](docs/README.md)
 
-Author
-----
-Tim Messerschmidt
-PayPal Developer Evangelist  
-Twitter: [@SeraAndroid](http://twitter.com/SeraAndroid) / [@PayPalDev](http://twitter.com/PayPalDev)
-
 License
 =====
 See [LICENSE.txt](LICENSE.txt)
