@@ -204,6 +204,7 @@ Then it will get changed into something like:
 | `InvoiceId` | The invoice ID. Specify `InvoiceId={InvoiceId}` |
 | `Tip` | The tip, if applicable. `Specify Tip={Tip}` |
 | `TxId` | The tax ID of the merchant. Specify `TxId={TxId}` |
+| `Number` | The merchant reference number for the invoice, which you can optionally pass in when opening PayPal Here with the `number` parameter. Mind the difference in capitalization. Specify `Number={Number}` |
 
 
 ### Output Fields
@@ -211,8 +212,9 @@ Then it will get changed into something like:
 | Input field name | Description |
 | ---------------- | ----------- |
 | `Type` | The payment method, for example `SWIPE`. Returned values are listed below, but your code should be able to handle new values as they get introduced. <br /><br /> If the transaction was interrupted, for example if a credit card was declined, the value is `UNKNOWN`. Note: If a credit card is declined, the merchant can enter an alternative payment method. <br /><br /> If the merchant cancels, the order-entry’s return URL is called, appended with `Type=UNKNOWN`. <br /><br />Due to legacy issues, the values for "Type" currently differ based on the version being used.<br />On PayPal Here versions 2.x on all platforms, these values can be: `UNKNOWN`, `KEY`, `SCAN`, `SWIPE`, `PAYPAL`, `CHECK`, `CASH`, `CHIP`, `EMV_SWIPE`.<br />On iPad 1.x, these values can be: `Unknown`, `CreditCard`, `Check`, `Cash`, `PayPal`, `DebitCard`, `Other`, `ChipCard`.<br /><br />You should code your integrations to handle new values being returned in this field.|
-| `InvoiceId` | The ID of the new invoice for which payment was accepted. For information about the input value that corresponds to this ID, see __Invoice as a JSON object.  |
+| `InvoiceId` | The ID of the new invoice for which payment was accepted.  |
 | `Tip` | The monetary value tip, if applicable. |
+| `Number` | The merchant reference number for the invoice, which you can optionally pass in when opening PayPal Here with the `number` parameter. Mind the difference in capitalization. For more information about the input value that corresponds to this ID, see __Invoice as a JSON object.__ |
 
 
 ## Order and Payment Flow
