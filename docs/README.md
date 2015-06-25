@@ -123,7 +123,7 @@ For example, before encoding the values of each input field, the JSON object cou
 
 ```
 
-Note: In the JSON input object (containing the invoice data), you may provide a unique invoice ID (in the `number` field). It must be unique to the merchant. If you leave out the number field, an invoice ID will be assigned, but if you provide the number field with a repeated value, or no value, (for example, if you send `“number”: “”`, or send `“number”: “12345”` every time), unexpected behavior will result.
+Note: In the JSON input object (containing the invoice data), you may provide a unique invoice ID (in the `number` field). It must be unique to the merchant. If you leave out the number field, an invoice ID will be assigned, but if you provide the number field with a repeated value, or no value, (for example, if you send `“number”: “”`, or send `“number”: “12345”` every time), unexpected behavior will result. This value will be passed back to you in the return URL as `Number`.
 
 To use this invoice to send Paypal Invoices, see [How to Send an Invoice Using the Invoicing Service](https://developer.paypal.com/webapps/developer/docs/classic/invoicing/ht_invoicing-send/). Also see _Appendix A: Sample HTML and Javascript Code_.
 
