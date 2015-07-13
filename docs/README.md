@@ -205,6 +205,7 @@ Then it will get changed into something like:
 | `Tip` | The tip, if applicable. `Specify Tip={Tip}` |
 | `TxId` | The tax ID of the merchant. Specify `TxId={TxId}` |
 | `Number` | The merchant reference number for the invoice, which you can optionally pass in when opening PayPal Here with the `number` parameter. Mind the difference in capitalization. Specify `Number={Number}` |
+| `Total` | The final total amount of the invoice. `Total={Total}` **Available in v2.5 & later** |
 
 
 ### Output Fields
@@ -215,6 +216,7 @@ Then it will get changed into something like:
 | `InvoiceId` | The ID of the new invoice for which payment was accepted.  |
 | `Tip` | The monetary value tip, if applicable. |
 | `Number` | The merchant reference number for the invoice, which you can optionally pass in when opening PayPal Here with the `number` parameter. Mind the difference in capitalization. For more information about the input value that corresponds to this ID, see __Invoice as a JSON object.__ |
+| `Total` | The final total amount of the invoice. |
 
 
 ## Order and Payment Flow
