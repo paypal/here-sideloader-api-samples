@@ -36,6 +36,12 @@ To send an invoice to the PayPal Here app, specify a URL. The URL root is the fo
 
     paypalhere://takePayment?
 
+For new Android integrations use:
+
+    paypalhere://takePayment/v2?
+
+Android apps using `takePayment` will continue working as is, but `takePayment/v2` behavior is in sync with the API described in this document.
+
 When the URL root is used with the input fields discussed in this document, the PayPal Here mobile app
 is launched. **Most of the input values must be URL-encoded**, but the invoice data **may be** Base64-
 encoded instead (see below).
@@ -367,4 +373,108 @@ If your app is written in Objective-C or Swift, you can use the `canOpenURL` fun
         [alertView show];
         [alertView release];
     }
+```
+
+
+## Order and Payment Flow
+
+**Important:** For a more detailed explanation of the order and payment flow, see the following user-experience document:
+
+* PayPal Here Mobile Apps API: Payment Flow Example (Filename: _PayPal Here Mobile Apps API - Payment flow Example.pdf_)
+
+This section uses an example of charging a credit card to outline steps for:
+
+* Using an order-entry app to send an invoice to the PayPal Here app
+* Accepting a payment in the PayPal Here app
+
+After the merchant accepts the payment, your order-entry app is re-launched so the merchant can
+confirm that the payment was successfully recorded in the order-entry app.
+
+The following steps describe a version of an order and payment flow.
+
+1. Merchant starts the order-entry app and brings up an order.
+2. Merchant chooses **Pay** in the order-entry app.
+3. The order-entry app uses the following URL and fields to launch the PayPal Here app:
+`paypalhere://takePayment?[URL-encoded input fields]&invoice=[invoice as a base64-encoded JSON object]`
+4. Merchant logs into Merchant’s PayPal account. On the Charge screen, the PayPal Here app displays the items and amounts of the order.
+  * <img src="OrderPaymentStepCart.png" height="400" />
+5. In the PayPal Here app, Merchant chooses **Charge**.
+6. . On the Payment Options screen, the Merchant can choose Card, or swipe the card. If the Merchant chooses a different option on the following screen, subsequent steps would differ from those below.
+  * <img src="OrderPaymentStepSelectPayment.png" height="400" />
+7. On the Card Info screen, Merchant can swipe the credit card, as in this example. If Merchant keys in the card or uses a different payment method, the screens are different.
+8. Merchant gives the phone to the customer so the customer can sign for the payment. The customer signs and hands back the phone.
+9. Merchant asks the customer if the customer wants a receipt, and Merchant can choose to send the receipt.
+  * <img src="OrderPaymentStepComplete.png" height="400" />
+10. A confirmation is displayed, and when Merchant chooses **Done**, the following occurs: PayPal Here re-launches the order-entry app by calling the URL that was passed in as the return URL in the original call to the PayPal Here app. In that URL, PayPal Here includes the status of the transaction, so the order-entry app can display the status (see the Type output field in the _Call Reference_). If the payment was unsuccessful, the order-entry app records the lack of success and restarts at an appropriate step above.
+
+
+
+## Call Reference
+
+Your order-entry app can send an invoice to the PayPal Here app. For a description of this process, in this document, see Send an Invoice to the PayPal Here Mobile App.
+
+
+### Input Fields
+
+| Input field name  | Description | Comment |
+| -------------     | ----------- | ------- |
+| accepted          | The payment methods to be offered in the PayPal Here app (i.e., the values that you specify will determine the payment methods offered). Acceptable values are `cash`, `card`, `invoice`, `check`, and `paypal`.  | Individual countries may not allow certain payment methods. This field is optional. |
+| returnUrl         | The URL of your app (or mobile web page, email, short URL, SMS, or anywhere a URL can be used).  This value must be a well-formatted URL. The user is sent to this URL after the payment is completed (or the transaction is cancelled). **See _“Structuring the returnUrl Input Field,”_ below.** The URL can include placeholders (using curly braces), which will be replaced with desired transaction information. | This field is optional.  |
+| as                | Set the optional `as` input field to `b64` if you will Base64-encode the JSON invoice object. If you won’t Base64-encode the JSON invoice object, omit the as parameter. Base-64 encoding (used if you specify `as=b64`) is recommended for the JSON invoice object (as an alternative to URL-encoding) because Base-64 encoding is more likely to result in correct encoding.  | For information about the JSON invoice object, see `invoice`, below. |
+| step              | Stage within the PayPal Here app at which the merchant will begin. Specify `step=choosePayment`  | |
+| invoice           | A JSON object that contains the invoice data. | See the following section of this document: _Invoice as a JSON object_  |
+| payerPhone        | If the buyer email address is known ahead of time, this can be specified in the invoice directly. However, if the buyer's phone number is known and your app desires an SMS receipt to be offered to them, the `payerPhone` field will be used to pre-fill that field in US format. |  |
+
+
+### Structuring the `returnUrl` Input Field
+
+The data for the `returnUrl` input field is a URL that can include placeholders for the desired transaction information. That is, you can use curly braces in the URL for the PayPal Here app to return specific data about the transaction. The following table provides information about this data. For an example, see _URL-Encoded Input Fields_.
+
+| Field of the `returnUrl` input field  | Description |
+| -------------     | ----------- |
+| Root URL of your app, including the call that was invoked by your app. Example: `my_registered_location://takePayment` | The PayPal Here app uses this value to return the merchant to your app, after payment |
+| `{result}?` | The fields whose values you want returned by the PayPal Here app |
+| `Type` | The type of payment made, e.g. `card`. Specify `Type={Type}` |
+| `InvoiceId` | The invoice ID. Specify `InvoiceId={InvoiceId}` |
+| `Tip` | The tip, if applicable. `Specify Tip={Tip}` |
+| `TxId` | The tax ID of the merchant. Specify `TxId={TxId}` |
+| `Email` | Email of buyer, if available. Specifiy `Email={Email}` |
+
+
+### Output Fields
+
+| Input field name | Description |
+| ---------------- | ----------- |
+| `Type` | The payment method, for example `SWIPE`. Returned values are listed below, but your code should be able to handle new values as they get introduced. <br /><br /> If the transaction was interrupted, for example if a credit card was declined, the value is `UNKNOWN`. Note: If a credit card is declined, the merchant can enter an alternative payment method. <br /><br /> If the merchant cancels, the order-entry’s return URL is called, appended with `Type=Unknown`. <br /><br />Due to legacy issues, the values for "Type" currently differ based on the version being used.<br />On PayPal Here versions 2.x, these values can be: `UNKNOWN`, `KEY`, `SCAN`, `SWIPE`, `PAYPAL`, `CHECK`, `CASH`, `CHIP`, `EMV_SWIPE`.<br />On iPad 1.x, these values can be: `Unknown`, `CreditCard`, `Check`, `Cash`, `PayPal`, `DebitCard`, `Other`, `ChipCard`.<br /><br />For iPad versions 2.3 and later, the values are consistent with iPhone.<br /><br />You should code your integrations to handle new values being returned in this field.|
+| `InvoiceId` | The ID of the new invoice for which payment was accepted. For information about the input value that corresponds to this ID, see __Invoice as a JSON object.  |
+| `Tip` | The monetary value tip, if applicable. |
+| `Email` | Buyer email, if available. |
+
+
+## Appendix A: Sample HTML and Javascript Code
+
+The following code is an example of a call to the PayPal Here mobile app URL (`paypalhere://takePayment?`). The input fields include an invoice, as a Base64-encoded JSON object. **Note:** This code has references to standard javascript libraries.
+
+* [sample.html](./sample.html)
+
+
+
+## Appendix B: Function for URL-Encoding in Objective-C
+
+For apps written in Objective-C, the following function shows how to URL-encode data (for the data of your input fields).
+
+```Objective-c
+
+    - (NSString *)urlEncode:(NSString *)rawStr {
+        NSString *encodedStr = (NSString *)CFBridgingRelease(
+            CFURLCreateStringByAddingPercentEscapes(
+                NULL,
+                (__bridge CFStringRef)rawStr,
+                NULL,
+                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                kCFStringEncodingUTF8));
+        return encodedStr;
+    }
+
+
 ```
