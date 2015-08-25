@@ -26,8 +26,8 @@ import java.text.MessageFormat;
 public class PayPalHereLauncher extends Activity
 {
   public static final String MARKET_URL = "market://details?id=com.paypal.here";
-  private static final String PPH_URL_STRING = "paypalhere://takePayment/v2/?accepted={0}&returnUrl={1}&invoice={2}&step=choosePayment&payerPhone={3}";
-  private static final String RETURN_URL = "pphsample://handleResponse/?Type={Type}&InvoiceId={InvoiceId}&Tip={Tip}&Email={Email}&TxId={TxId}";
+  private static final String PPH_URL_STRING = "paypalhere://takePayment/v2?accepted={0}&returnUrl={1}&invoice={2}&step=choosePayment&payerPhone={3}";
+  private static final String RETURN_URL = "pphsample://handleResponse/?Type={Type}&InvoiceId={InvoiceId}&Tip={Tip}&Email={Email}&TxId={TxId}&GrandTotal={GrandTotal}";
   private static final String ACCEPTED_PAYMENT_TYPES = "cash,card,paypal";
   private static final String RESPONSE_HOST = "handleResponse";
   private Invoice _invoice;
