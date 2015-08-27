@@ -2,3 +2,9 @@
 /local.properties
 /.idea/workspace.xml
 .DS_Store
+
+ .idea/
+ android_pph_sample/android_pph_sample.iml
+ build/intermediates/gradle_project_sync_data.bin
+ v2.iml
+

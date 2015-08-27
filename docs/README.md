@@ -211,7 +211,7 @@ Then it will get changed into something like:
 | `Tip` | The tip, if applicable. `Specify Tip={Tip}` |
 | `TxId` | The tax ID of the merchant. Specify `TxId={TxId}` |
 | `Number` | The merchant reference number for the invoice, which you can optionally pass in when opening PayPal Here with the `number` parameter. Mind the difference in capitalization. Specify `Number={Number}` |
-| `GrandTotal` | The final total amount of the invoice. `GrandTotal={GrandTotal}` **Available in v2.5 & later** |
+| `GrandTotal` | The final total amount of the invoice. `GrandTotal={GrandTotal}` **Available in builds > v2.5 on iOS, v2.5.2 on Android** |
 
 
 ### Output Fields
