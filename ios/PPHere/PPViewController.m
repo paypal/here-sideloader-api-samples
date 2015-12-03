@@ -74,7 +74,8 @@
     NSLog(@"%@", pphUrlString);
     
     UIApplication *application = [UIApplication sharedApplication];
-    if ([application canOpenURL:pphUrl]){
+    //iOS 9 -> Don't forget to add this schema to info.plist as a white schema (http://useyourloaf.com/blog/querying-url-schemes-with-canopenurl.html)
+    if ([application canOpenURL:[NSURL URLWithString:@"paypalhere://"]]){
         [application openURL:pphUrl];
     } else {
         NSURL *url = [NSURL URLWithString:@"itms://itunes.apple.com/us/app/paypal-here/id505911015?mt=8"];
